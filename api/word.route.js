@@ -5,8 +5,9 @@ let Word = require('./word.model');
 
 wordRoutes.route('/add').post(function (req, res) {
     let word = new Word(req.body);
+    console.log(req.body);
     word.save()
-        .then(business => {
+        .then(word => {
             res.status(200).json({'word': 'word in added successfully'});
         })
         .catch(err => {
