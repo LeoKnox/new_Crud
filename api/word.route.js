@@ -37,8 +37,15 @@ wordRoutes.route('/').get(function (req, res) {
     });
 });
 
+wordRoutes.route('/edit/:id').get(function(req,res){
+    let id = req.params.id;
+    Word.findById(id, function (err, word){
+        res.json(word);
+    });
+});
+
 wordRoutes.route('/update/:id').post(function (req, res) {
-    Word.findById(req.paramsid, function(err, business) {
+    Word.findById(req.params.id, function(err, word) {
         if (!word)
             res.status(404).send("data is not found");
         else {
@@ -59,7 +66,7 @@ wordRoutes.route('/update/:id').post(function (req, res) {
 });
 
 wordRoutes.route('/delete/:id').get(function (req, res) {
-    word.finByIdAndRemove({_id: req.params.id}, function(err, word){
+    Word.findByIdAndRemove({_id: req.params.id}, function(err, word){
         if(err) res.json(err);
         else res.json('Successfully removed');
     });
